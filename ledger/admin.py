@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ingredient, Recipe, RecipeIngredient, Profile
+from .models import Ingredient, Recipe, RecipeImage, RecipeIngredient, Profile
 
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
@@ -17,7 +17,14 @@ class RecipeIngredientAdmin(admin.ModelAdmin):
     model = RecipeIngredient
     list_display = ('recipe', 'ingredient', 'quantity')
 
+class RecipeImageInline(admin.TabularInline):
+    model = RecipeImage
+    extra = 1
+
+class RecipeAdmin(admin.ModelAdmin):
+    inlines = [RecipeImageInline]
+
+admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Ingredient, IngredientAdmin)
-admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(RecipeIngredient, RecipeIngredientAdmin)

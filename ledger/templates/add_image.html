@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Image for {{ recipe.name }}{% endblock %}
+
+{% block content %}
+
+<h1>Add Image to "{{ recipe.name }}"</h1>
+<form method="POST" enctype="multipart/form-data">
+    <ul><li>{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload Image</button></li></ul>
+</form>
+
+<a href="{% url 'recipe_detail' num=recipe.pk %}" class="back-button">Back to {{ recipe.name }}</a>
+{% endblock %}

@@ -17,6 +17,16 @@
     <p align="center">
         Last updated: <i>{{ recipe.updated_on }}</i>
     </p>
-    
+
+    <h2>Images</h2>
+    <a href="{% url 'add_image' recipe.id %}" class="upload-button">Upload Image</a>
+
+    <ul>
+    {% for img in recipe.images.all %}
+        <li><img src="{{ img.image.url }}" alt="{{ img.description }}" style="max-width: 100%;">
+        <p><em>{{ img.description }}</em></p></li>
+    {% endfor %}    
+    </ul>
+
     <a href="{% url 'recipe_list' %}" class="back-button">Back to Recipes</a>
 {% endblock %}
